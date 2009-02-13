@@ -10,6 +10,24 @@ Earth-Moon system.
 
 It is a work-in-progress.
 
+
+Getting Started (for the impatient)
+---------------
+Start running the orbital simulation in the background and capture the
+data.
+
+  orbit.pl > orbit.log &
+
+Display the 'telemetry' stream
+
+  tail -f orbit.log | orbit-display-stream.pl
+
+Display the 'telemetry' in a full screen terminal mode (requires
+libcurses-perl)
+
+  tail -f orbit.log | orbit-display-curses.pl
+
+
 Programs
 --------
 
