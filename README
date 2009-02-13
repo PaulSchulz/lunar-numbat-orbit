@@ -1,0 +1,57 @@
+Lunar Numbat Orbit
+==================
+
+Introduction
+------------
+
+Orbit (or more precisely, Lunar Numbat Orbit) is a series of scripts
+for producing orbital data (telemetry) for an object moving in the
+Earth-Moon system.
+
+It is a work-in-progress.
+
+Programs
+--------
+
+orbit.pl 
+
+  This is the main script which simulates the motion of an object
+  travelling in orbit in the Earth/Moon system.
+
+  The 'stdout' of this program contains the 'telemetry' for the object
+  in the form of:
+
+  ----
+  rtc:1234529684
+  t:1
+  x:6471
+  y:22.372
+  vx:0
+  vy:11.186
+            <---- blank line
+  rtc:1234529685
+  t:2
+  x:6471
+  y:33.558
+  vx:0
+  vy:11.186
+  ----
+
+orbit-display-stream.pl
+
+  This script reads in the 'telemetry' data on stdin and displays it
+  along a single line, in the form:
+
+  ----
+  t:1            x:6471.000     y:22.372       vx:0.000        vy:11.186       
+  t:2            x:6471.000     y:33.558       vx:0.000        vy:11.186 
+  ----
+
+  This is suitable for monitoring the changes in raw data.
+
+orbit-display-curses.pl
+
+  Requires: libcurses-perl
+
+  This script reads in the 'telemetry' data on stdin and displays it
+  in a full screen curses display.
