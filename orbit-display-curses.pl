@@ -21,6 +21,7 @@
 $|=1;
 
 use Curses;
+use Orbit;
 
 initscr();
 clear();
@@ -29,20 +30,33 @@ cbreak();
 
 sub template ( ) {
 
-  move(1,2);
-  printw( "time(s)   :" );
-
   move(2,2);
-  printw( "x   (km)  :" );
+  printw( "  time(s)   :" );
 
   move(3,2);
-  printw( "y   (km)  :" );
+  printw( "  x   (km)  :" );
 
   move(4,2);
-  printw( "v_x (km/h):" );
+  printw( "  y   (km)  :" );
 
   move(5,2);
-  printw( "v_y (km/h):" );
+  printw( "  v_x (km/s):" );
+
+  move(6,2);
+  printw( "  v_y (km/s):" );
+
+  # Derived measurements
+  move(8,2);
+  printw( "r_mag   (km):" );
+
+  move(9,2);
+  printw( "r_theta(rad):" );
+
+  move(10,2);
+  printw( "v_mag (km/s):" );
+
+  move(11,2);
+  printw( "v_theta(rad):" );
 
   refresh();
 
@@ -61,20 +75,44 @@ while ( $line = <> ) {
 
   } else {
 
-    move(1,14);
-    printw("%s", sprintf("%11.3f",$data{'t'}) );
+    move(2,16);
+    printw("%s", sprintf("%11s\n",sec2dur(int($data{'t'}))) );
 
-    move(2,14);
+    move(3,16);
     printw("%s", sprintf("%11.3f",$data{'x'}) );
 
-    move(3,14);
+    move(4,16);
     printw("%s", sprintf("%11.3f",$data{'y'}) );
 
-    move(4,14);
+    move(5,16);
     printw("%s", sprintf("%11.3f",$data{'vx'}) );
 
-    move(5,14);
+    move(6,16);
     printw("%s", sprintf("%11.3f",$data{'vy'}) );
+
+    # Derived values
+    my $x = $data{'x'};
+    my $y = $data{'y'};
+
+    my ( $r_mag, $r_theta ) = rec2pol ( $x, $y );
+
+    move(8,16);
+    printw("%s", sprintf("%11.3f",$r_mag) );
+
+    move(9,16);
+    printw("%s", sprintf("%11.3f",$r_theta) );
+
+    my $vx = $data{'vx'};
+    my $vy = $data{'vy'};
+
+    my $v_mag   = sqrt ( $vx*$vx + $vy*$vy );
+    my $v_theta = atan2( $vy, $vx );
+
+    move(10,16);
+    printw("%s", sprintf("%11.3f",$v_mag) );
+
+    move(11,16);
+    printw("%s", sprintf("%11.3f",$v_theta) );
 
     refresh();
   }
