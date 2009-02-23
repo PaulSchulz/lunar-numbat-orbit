@@ -62,9 +62,103 @@ sub template ( ) {
 
 }
 
+# Display parameter
+my $dx1 = 30;
+my $dx2 = 79;
+my $dx =  int($dx1 + ($dx2 - $dx1) / 2);
+
+my $dy1 = 1;
+my $dy2 = 23;
+my $dy =  int($dy1 + ($dy2 - $dy1) / 2);
+
+sub near_earth_orbit_display ( ) {
+
+# This image would need to be adjusted if the display parameters
+# are changed.
+
+  move($dy-9,$dx-21);
+  printw("              ,------------.              ");
+  move($dy-8,$dx-21);
+  printw("          .--'              `--.          ");
+  move($dy-7,$dx-21);
+  printw("       .-'                      `-.       ");
+  move($dy-6,$dx-21);
+  printw("     .'                            `.     ");
+  move($dy-5,$dx-21);
+  printw("   .'                                `.   ");
+  move($dy-4,$dx-21);
+  printw('  /                                    \  ');
+  move($dy-3,$dx-21);
+  printw(' |                                      | ');
+  move($dy-2,$dx-21);
+  printw(' |                                      | ');
+  move($dy-1,$dx-21);
+  printw('|                                        |');
+  move($dy,$dx-21);
+  printw('|                                        |');
+  move($dy+1,$dx-21);
+  printw(' |                                      | ');
+  move($dy+2,$dx-21);
+  printw(' |                                      | ');
+  move($dy+3,$dx-21);
+  printw('  \                                    /  ');
+  move($dy+4,$dx-21);
+  printw('   \_                                _/   ');
+  move($dy+5,$dx-21);
+  printw('     \_                            _/     ');
+  move($dy+6,$dx-21);
+  printw('       \__                      __/       ');
+  move($dy+7,$dx-21);
+  printw('          \___              ___/          ');
+  move($dy+8,$dx-21);
+  printw('              \____________/              ');
+
+  refresh();
+
+  return $earth_radius+1000;
+
+}
+
+sub earth_orbit_display ( ) {
+
+  move($dy-1,$dx-2);
+  printw(" .-.");
+  move($dy,$dx-2);
+  printw("(   )");
+  move($dy+1,$dx-2);
+  printw(" `-'");
+
+  #    move(23,79);
+  #    printw(".");
+
+  refresh();
+
+  return $earth_radius+6000;
+
+}
+
+sub earth_moon_display ( ) {
+
+  move($dy,$dx);
+  printw("O");
+
+  #    move(23,79);
+  #    printw(".");
+
+  refresh();
+
+  return $moon_apogee;
+
+}
+
 template();
 
 my %data;
+
+my $scale = near_earth_orbit_display();
+
+my $X=0;
+my $Y=0;
 
 while ( $line = <> ) {
   chomp $line;
@@ -76,7 +170,7 @@ while ( $line = <> ) {
   } else {
 
     move(2,16);
-    printw("%s", sprintf("%11s\n",sec2dur(int($data{'t'}))) );
+    printw("%s", sprintf("%11s",sec2dur(int($data{'t'}))) );
 
     move(3,16);
     printw("%s", sprintf("%11.3f",$data{'x'}) );
@@ -113,6 +207,15 @@ while ( $line = <> ) {
 
     move(11,16);
     printw("%s", sprintf("%11.3f",$v_theta) );
+
+    move($Y,$X);
+    printw(" ");
+
+    $X = $x / $scale * ( $dx2 - $dx1 )/2.0 + $dx;
+    $Y = $y / $scale * ( $dy2 - $dy1 )/2.0 + $dy;
+
+    move( $Y, $X );
+    printw("+");
 
     refresh();
   }

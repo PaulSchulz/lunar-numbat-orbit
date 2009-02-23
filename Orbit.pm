@@ -18,6 +18,25 @@
 # You should have received a copy of the GNU General Public License
 # along with Orbit.  If not, see <http://www.gnu.org/licenses/>.
 
+##############################################################################
+# Constants
+
+# Reference: http://en.wikipedia.org/wiki/Earth
+our $earth_radius  = 6371.0;        # km             - Equatorial radius
+our $earth_mass    = 5.9736e24;     # kg
+our $earth_ev      = 11.186;        # km/s
+
+# Reference: http://en.wikipedia.org/wiki/Moon
+our $moon_radius   = 1737.10;       # km             - Mean radius
+our $moon_mass     = 7.3477e22;     # kg
+our $moon_perigee  = 363104;        # km
+our $moon_apogee   = 405696;        # km
+our $moon_avgspeed = 1.022;         # km/s
+
+# Reference: http://en.wikipedia.org/wiki/Gravitational_constant
+our $G             = 6.67428e-11;   # m^3 kg^-1 s^-1 - Gravitational constant
+
+##############################################################################
 # Convert rectalinear coordinates (x,y) to polar coordinates
 # (r,theta).
 sub rec2pol ( $ $ ) {
@@ -40,6 +59,7 @@ sub pol2rec ( $ $ ) {
   return ( $x, $y );
 }
 
+##############################################################################
 # Convert seconds into a duration string (eg. 1h4m20s)
 # Assumes that the duration is positive.
 sub sec2dur ( $ ) {
