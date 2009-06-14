@@ -1,0 +1,8 @@
+-*- outline -*-
+
+* Contributions and code from other sources
+
+roy/
+	Author: Roy Duncan
+	svn export http://code.lunarnumbat.org/svn/roy
+
