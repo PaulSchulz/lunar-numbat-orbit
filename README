@@ -11,10 +11,20 @@ Earth-Moon system.
 It is a work-in-progress.
 
   Lunar Numbat Website: http://lunarnumbat.org
-  Lunar Numbet Orbit:    
+  Lunar Numbet Orbit:
+    http://www.mawsonlakes.org/mediawiki/index.php/Lunar_Numbat_Orbit  
 
 
-Getting Started (for the impatient)
+Getting Started (for the REALLY impatient)
+---------------
+Create a plot of the trajectory to the moon (with thanks to Roy Duncan).
+
+  cd scripts
+  ./gnuplot-orbit.sh
+  evince orbit.ps
+
+
+Getting Started (for the simply impatient)
 ---------------
 Start running the orbital simulation in the background and capture the
 data.
@@ -76,3 +86,6 @@ orbit-display-curses.pl
 
   This script reads in the 'telemetry' data on stdin and displays it
   in a full screen curses display.
+
+
+See the contrib directory for more orbit scripts and examples.
