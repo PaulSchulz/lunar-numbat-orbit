@@ -4,5 +4,6 @@
 
 roy/
 	Author: Roy Duncan
-	svn export http://code.lunarnumbat.org/svn/roy
+	svn export http://code.lunarnumbat.org/svn/roy/trunk roy
+
 
